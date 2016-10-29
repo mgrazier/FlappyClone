@@ -11,11 +11,11 @@ public class ObstacleSpawner : MonoBehaviour {
     public List<Transform> childObstacles;
 
     private float spawnDelay;   // Time between spawns
-    private float lastSpawn;
     private float nextSpawn;    
     private Vector3 newSpawnerPosition;
 
     private GameObject newObstacle;
+    //TODO: randomize obstacle size/position
     private float bottomObstacleScaleY;
     private float topObstaclePositionY;
     private float topObstacleScaleY;
@@ -32,10 +32,12 @@ public class ObstacleSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Get Flappy's position and set our obstacle spawner 12 units to the right so it is always offscreen.
         newSpawnerPosition = new Vector3(flappy.transform.position.x, 0f, 0f);
         newSpawnerPosition.x += 12;
         obstacleSpawner.transform.position = newSpawnerPosition;
 
+        // If we've reached our nextSpawn time, spawn a new obstacle.
         if (nextSpawn - Time.time <= 0) {
             
             newObstacle = (GameObject)Instantiate(obstacle, obstacleSpawner.transform.position, Quaternion.identity);

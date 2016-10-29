@@ -17,12 +17,13 @@ public class FlappyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.anyKeyDown) {
+            rb.velocity = new Vector3(startVelX, 5f, 0f);
+        }
+    }
 
 	void FixedUpdate() {
-		if (Input.anyKeyDown) {
-			rb.velocity = new Vector3 (startVelX, 5f, 0f);
-		}
+
 	}
+
 }
