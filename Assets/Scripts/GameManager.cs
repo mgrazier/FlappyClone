@@ -4,18 +4,39 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+    public GameObject flappy;
+    private FlappyController flappyController;
     public Text scoreText;
     private int score;
+    private GameObject startCanvas;
+    private GameObject obstacleSpawner;
+    private ObstacleSpawner os;
+    private Rigidbody flappyRB;
+    private bool gameStarted = false;
 
 	// Use this for initialization
 	void Start () {
+        flappy = GameObject.Find("Flappy");
+        flappyController = flappy.GetComponent<FlappyController>();
+        flappyRB = flappy.GetComponent<Rigidbody>();
+        startCanvas = GameObject.Find("StartCanvas");
+        obstacleSpawner = GameObject.Find("ObstacleSpawner");
+        os = obstacleSpawner.GetComponent<ObstacleSpawner>();
+
         score = 0;
         UpdateScore();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.anyKeyDown) {
+            if (!gameStarted) {
+                gameStarted = true;
+                HideStartMenu();
+                os.StartSpawner();
+            }
+            flappyController.Flap();
+        }
 	}
 
     public void IncreaseScore()
@@ -26,6 +47,11 @@ public class GameManager : MonoBehaviour {
 
     void UpdateScore()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
+    }
+
+    void HideStartMenu()
+    {
+        startCanvas.SetActive(false);
     }
 }

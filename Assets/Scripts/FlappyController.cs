@@ -10,20 +10,23 @@ public class FlappyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-
 		rb.velocity = new Vector3 (startVelX, 0f, 0f);
+        rb.isKinematic = true;
         Physics.gravity = new Vector3(0, gravity, 0);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (Input.anyKeyDown) {
-            rb.velocity = new Vector3(startVelX, 5f, 0f);
+	void FixedUpdate () {
+        if (rb.isKinematic) {
+            transform.Translate(.05f, 0, 0);
         }
     }
 
-	void FixedUpdate() {
-
-	}
-
+    public void Flap()
+    {
+        if (rb.isKinematic) {
+            rb.isKinematic = false;
+        }
+        rb.velocity = new Vector3(startVelX, 5f, 0f);
+    }
 }
