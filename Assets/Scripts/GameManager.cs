@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public Text scoreText;
     private int score;
     private GameObject startCanvas;
+    private GameObject gameOverCanvas;
     private GameObject obstacleSpawner;
     private ObstacleSpawner os;
     private Rigidbody flappyRB;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour {
         flappyController = flappy.GetComponent<FlappyController>();
         flappyRB = flappy.GetComponent<Rigidbody>();
         startCanvas = GameObject.Find("StartCanvas");
+        gameOverCanvas = GameObject.Find("GameOverCanvas");
+        gameOverCanvas.SetActive(false);
         obstacleSpawner = GameObject.Find("ObstacleSpawner");
         os = obstacleSpawner.GetComponent<ObstacleSpawner>();
 
@@ -53,5 +56,10 @@ public class GameManager : MonoBehaviour {
     void HideStartMenu()
     {
         startCanvas.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        gameOverCanvas.SetActive(true);
     }
 }
