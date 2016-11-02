@@ -7,13 +7,14 @@ public class GameManager : MonoBehaviour {
     public GameObject flappy;
     private FlappyController flappyController;
     public Text scoreText;
-    private int score;
+    public int score;
     private GameObject startCanvas;
     private GameObject gameOverCanvas;
     private GameObject obstacleSpawner;
     private ObstacleSpawner os;
     private Rigidbody flappyRB;
     private bool gameStarted = false;
+    private ScoreCounter sc;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour {
         gameOverCanvas.SetActive(false);
         obstacleSpawner = GameObject.Find("ObstacleSpawner");
         os = obstacleSpawner.GetComponent<ObstacleSpawner>();
+        sc = gameOverCanvas.GetComponent<ScoreCounter>();
 
         score = 0;
         UpdateScore();
@@ -61,5 +63,7 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         gameOverCanvas.SetActive(true);
+        sc.StartCoroutine("CountTo", score);
+        Debug.Log("Score: " + score);
     }
 }
