@@ -20,6 +20,7 @@ public class ScoreCounter : MonoBehaviour {
 
     IEnumerator CountTo (int target)
     {
+        yield return new WaitForSeconds(.3f);
         int start = score;
         for (float timer = 0; timer < duration; timer += Time.deltaTime) {
             float progress = timer / duration;

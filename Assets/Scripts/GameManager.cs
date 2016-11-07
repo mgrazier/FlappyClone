@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     private Rigidbody flappyRB;
     private bool gameStarted = false;
     private ScoreCounter sc;
+    private Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -60,10 +61,12 @@ public class GameManager : MonoBehaviour {
         startCanvas.SetActive(false);
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(.25f);
         gameOverCanvas.SetActive(true);
         sc.StartCoroutine("CountTo", score);
         Debug.Log("Score: " + score);
+        yield return null;
     }
 }
