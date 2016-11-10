@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Advertisements;
 
 public class ObstacleSpawner : MonoBehaviour {
 
@@ -27,6 +28,7 @@ public class ObstacleSpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         obstacleSpawner = GameObject.Find("ObstacleSpawner");
         isActive = false;
         //Instantiate(obstacle, obstacleSpawner.transform.position, Quaternion.identity);
@@ -46,15 +48,7 @@ public class ObstacleSpawner : MonoBehaviour {
         if (nextSpawn - Time.time <= 0 && isActive) {
 
             SpawnObstacle();
-
-            /*
-            newObstacle.GetComponentsInChildren<Transform>(childObstacles);
-            childObstacles[0].localScale.Set(1f, bottomObstacleScaleY, 1f);
-            childObstacles[1].localScale.Set(1f, topObstacleScaleY, 1f);
-
-            childObstacles[0].localPosition.Set(1, bottomObstaclePositionY, 1f);
-            childObstacles[1].localPosition.Set(1, topObstaclePositionY, 1f);
-            */
+            newObstacle.transform.position = new Vector3(newObstacle.transform.position.x, Random.Range(-4, 2), newObstacle.transform.position.z);
 
             spawnDelay = Random.Range(2f, 3.5f);
             nextSpawn = Time.time + spawnDelay;

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class KillZone : MonoBehaviour {
 
-	public BoxCollider bc;
+	public BoxCollider2D bc;
     public GameManager gm;
     public Animator anim;
 
 	// Use this for initialization
 	void Start () {
-		bc = GetComponent<BoxCollider> ();
+		bc = GetComponent<BoxCollider2D> ();
         gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         anim = GameObject.FindGameObjectWithTag("Flash").GetComponent<Animator>();
     }
@@ -19,8 +19,8 @@ public class KillZone : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (other.CompareTag("Player")) {
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.CompareTag("Player")) {
 			other.gameObject.SetActive (false);
             anim.Play("Flash");
             //gm.GameOver();

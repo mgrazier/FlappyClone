@@ -3,16 +3,19 @@ using System.Collections;
 
 public class FlappyController : MonoBehaviour {
 
-	public Rigidbody rb;
+	public Rigidbody2D rb;
 	public float startVelX = 1.0f;
     public float gravity = -10.0f;
 
+    private bool isDashing;
+
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody> ();
+		rb = GetComponent<Rigidbody2D> ();
 		rb.velocity = new Vector3 (startVelX, 0f, 0f);
         rb.isKinematic = true;
         Physics.gravity = new Vector3(0, gravity, 0);
+        isDashing = false;
 	}
 	
 	// Update is called once per frame
@@ -22,11 +25,20 @@ public class FlappyController : MonoBehaviour {
         }
     }
 
-    public void Flap()
+    void Update()
     {
-        if (rb.isKinematic) {
-            rb.isKinematic = false;
-        }
-        rb.velocity = new Vector3(startVelX, 5f, 0f);
+    }
+
+
+
+
+    public bool GetDashing()
+    {
+        return isDashing;
+    }
+
+    public void SetDashing(bool newIsDashing)
+    {
+        isDashing = newIsDashing;
     }
 }
